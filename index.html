@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Iniciar sesión</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+        }
+        .container {
+            max-width: 400px;
+            margin: 10vh auto;
+            padding: 2rem;
+            background: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 0.75rem;
+            margin-top: 1rem;
+            border-radius: 0.3rem;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <form method="post" action="{{ url_for('validar') }}">
+        <h1>Iniciar sesión</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="error">{{ messages[0] }}</div>
+            {% endif %}
+        {% endwith %}
+        <label for="user">Usuario:</label>
+        <input type="text" name="user" id="user" required pattern="[a-zA-Z0-9]+" autocomplete="username">
+
+        <label for="pass">Contraseña:</label>
+        <input type="password" name="pass" id="pass" required autocomplete="current-password">
+
+        <button type="submit">Entrar</button>
+    </form>
+</div>
+</body>
+</html>
